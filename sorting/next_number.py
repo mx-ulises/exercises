@@ -1,3 +1,4 @@
+#!/bin/python
 
 def next_suffix(suffix):
     new_suffix = None
