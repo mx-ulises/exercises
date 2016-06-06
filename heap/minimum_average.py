@@ -29,4 +29,3 @@ while pares:
             heappush(h, (l_i, (t_i, l_i)))
 
 print (w / n)
-
