@@ -6,11 +6,11 @@ n = int(raw_input())
 set_forest = DisjointSet(n * 2)
 for _ in xrange(n):
     g, b = map(int, raw_input().split())
-    set_forest.Union(g - 1, b - 1)
+    set_forest.union(g - 1, b - 1)
 
 map_count = [0] * (n * 2)
 for i in xrange(n * 2):
-    parent = set_forest.Buscar(i)
+    parent = set_forest.find(i)
     map_count[parent] += 1
 
 max_num = 0;

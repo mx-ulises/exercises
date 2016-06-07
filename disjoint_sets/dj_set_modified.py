@@ -2,13 +2,18 @@
 
 class DisjointSet(object):
     def __init__(self, n):
-        self.parent = [x for x in range(n)]
-        self.rank = [0 for x in range(n)]
+        self.parent = [x for x in xrange(n)]
+        self.rank = [0 for x in xrange(n)]
+        self.elements = [1 for x in xrange(n)]
 
     def find(self, x):
-        if(self.parent[x]!=x):
-            self.parent[x]=self.find(self.parent[x])
+        if(self.parent[x] != x):
+            self.parent[x] = self.find(self.parent[x])
         return self.parent[x]
+
+    def set_size(self, x):
+        x_root = self.find(x)
+        return self.elements[x_root]
 
     def union(self, x, y):
         x_root = self.find(x)
@@ -21,4 +26,6 @@ class DisjointSet(object):
             self.parent[y_root] = x_root
         else:
             self.parent[y_root] = x_root
-            self.rank[x_root]+=1
+            self.rank[x_root] += 1
+        self.elements[x_root] += self.elements[y_root]
+        self.elements[y_root] = self.elements[x_root]
