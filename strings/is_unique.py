@@ -1,7 +1,7 @@
 #!/bin/python
 
 """
-Cracking the coding Interview
+Cracking the Coding Interview
 
 Arrays and Strings
 
@@ -25,3 +25,16 @@ def unique_array(s):
             return False
         char_array[key] = True
     return True
+
+# Positive
+print unique_hash("abc")
+print unique_hash("a")
+print unique_hash("az")
+print unique_hash("abcdefghijklmnopqrstuvwxyz")
+print unique_hash("")
+
+# Negative
+print unique_hash("aa")
+print unique_hash("aza")
+print unique_hash("azz")
+print unique_hash("abcdefghijklmnopqrstuvwxyza")
