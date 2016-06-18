@@ -12,7 +12,7 @@ def get_strings(string_val):
 
 LEVEL_1 = get_strings(original_string)
 
-for string_val in string_set:
+for string_val in LEVEL_1:
     string_set_lvl_2 = get_strings(string_val)
     for value in string_set_lvl_2:
         LEVEL_2[value] = 0
