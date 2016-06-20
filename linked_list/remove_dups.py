@@ -1,16 +1,15 @@
 #!/bin/python
 from linked_list import create_list, print_list, print_separator, N
-from compiler.ast import Node
 
 def delete_dups_buffer(root):
     if not root:
         return None
     node = root.next
     prev = root
-    unique_nodes = {root.value: root}
+    unique_nodes = {root.value: True}
     while node:
         if node.value not in unique_nodes:
-            unique_nodes[node.value] = node
+            unique_nodes[node.value] = True
             prev = node
         else:
             prev.next = node.next
