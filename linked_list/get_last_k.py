@@ -19,4 +19,3 @@ print get_last_k(root, 1).value
 print get_last_k(root, 2).value
 print get_last_k(root, 3).value
 print_separator()
-
