@@ -23,18 +23,6 @@ class LinkedList:
         node.next = LinkedList(value)
 
 
-    def palindrome(self, list_q):
-        list_q.append(self.value)
-        tail_result = True
-        if self.next:
-            tail_result = self.next.palindrome(list_q)
-        value = list_q.pop(0)
-        node_result = True
-        if value != self.value:
-            node_result = False
-        return node_result and tail_result
-
-
 def visit_list(root):
     node = root
     while node and not node.visited:
@@ -57,6 +45,17 @@ def create_list(n):
         value = random.randint(0, RANDOM_LIMIT)
         node.next = LinkedList(value)
         node = node.next
+    return root
+
+
+def create_list_2(l):
+    root = None
+    if l:
+        root = LinkedList(l[0])
+        node = root
+        for i in xrange(1, len(l)):
+            node.next = LinkedList(l[i])
+            node = node.next
     return root
 
 

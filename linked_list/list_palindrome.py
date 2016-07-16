@@ -1,38 +1,22 @@
 #!/bin/python
-from linked_list import LinkedList, print_list, print_separator
+from linked_list import create_list_2
 
-def create_list(array_list):
-    root = None
+def is_palindrome(root):
     node = root
-    for a in array_list:
-        if node:
-            node.add(a)
-            node = node.next
-        else:
-            root = LinkedList(a)
-            node = root
-    return root
+    s = []
+    while node:
+        s.append(node.value)
+        node = node.next
+    node = root
+    while node:
+        value = s.pop()
+        if value != node.value:
+            return False
+        node = node.next
+    return True
 
-def check_palindrome(root):
-    if root:
-        return root.palindrome([])
-    else:
-        return True
-
-print "LIST PALINDROME"
-print_separator()
-
-root = create_list([1, 2, 3, 2, 1])
-print print_list(root)
-print check_palindrome(root)
-print_separator()
-
-root = create_list([1, 2, 3, 2])
-print print_list(root)
-print check_palindrome(root)
-print_separator()
-
-root = create_list([])
-print print_list(root)
-print check_palindrome(root)
-print_separator()
+print is_palindrome(create_list_2(["a"]))
+print is_palindrome(create_list_2([]))
+print is_palindrome(create_list_2(["a", "b", "c", "b", "a"]))
+print is_palindrome(create_list_2(["a", "b", "c", "b", "a", "d"]))
+print is_palindrome(create_list_2(["d", "a", "b", "c", "b", "a"]))
