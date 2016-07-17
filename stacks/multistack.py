@@ -18,12 +18,12 @@ class MultiStack(object):
 
 
     def get_next_empty(self):
-        next = len(self.a)
+        next_free = len(self.a)
         for i in xrange(self.top, len(self.a)):
             if not self.a[i]:
-                next = i
+                next_free = i
                 break
-        return next
+        return next_free
 
 
     def pop(self, stack):
