@@ -1,17 +1,20 @@
 #!/bin/python
-from math import log
+def check_bit(n, i):
+    mask = 1 << i
+    return (n & mask) >> i
+
 NAMES = ["Louise", "Richard"]
 
 T = int(raw_input())
+
 for _ in xrange(T):
-    n = list("{0:b}".format(int(raw_input())))
+    n = int(raw_input())
     turn = 0
-    for d in n:
-        if d == "1":
-            turn += 1
-    i = 0
-    while n[-1 - i] != "1":
+    while not check_bit(n, 0):
         turn += 1
-        i += 1
-    turn = turn % 2
-    print NAMES[turn]
+        n = n >> 1
+    while n > 0:
+        if check_bit(n, 0):
+            turn += 1
+        n = n >> 1
+    print NAMES[turn % 2]
