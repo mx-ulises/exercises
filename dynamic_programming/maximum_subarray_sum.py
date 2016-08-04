@@ -1,7 +1,5 @@
 #!/bin/python
 
-import sys
-
 t = int(raw_input())
 for _ in xrange(t):
     n = int(raw_input())
