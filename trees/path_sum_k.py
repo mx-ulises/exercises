@@ -1,24 +1,19 @@
 #!/bin/python
 
-L = {0: [[]]}
-
-def add_value(x, p):
-    if x not in L:
-        L[x] = []
-    L[x].append(p)
-
-def get_paths(root, prefixes):
-    add_value(root.data, [root.data])
-    prefixes_2 = [[root.data]]
-    for p in prefixes:
-        p_1 = list(p).append(root.data)
-        x = sum(p_1)
-        add_value(x, p_1)
-        prefixes_2.append(p_1)
-    if root.left:
-        get_paths(root.left, prefixes_2)
-    if root.right:
-        get_paths(root.right, prefixes_2)
-
-def get_paths_k(root, k):
-    return get_paths(root, [])[k]
+def path_sum(root, k):
+    count = 0
+    q = [(root, [root.data])]
+    while q:
+        node, values = q.pop()
+        for value in values:
+            if value == k:
+                count += 1
+        if node.right:
+            values_right = [node.right.data + value for value in values]
+            values_right.append(node.right)
+            q.append((node.right, values_right))
+        if node.left:
+            values_left = [node.left.data + value for value in values]
+            values_left.append(node.left)
+            q.append((node.left, values_left))
+    return count
