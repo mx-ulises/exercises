@@ -3,7 +3,7 @@
 def get_sqrt(n):
     if n == 1:
         return 1
-    left, right = 0, n
+    left, right = float(0), float(n)
     x = (left + right) / 2
     n_test = x * x
     while n_test != n:
@@ -15,7 +15,7 @@ def get_sqrt(n):
         n_test = x * x
     return x
 
-n = 1
+n = 2.5234
 print get_sqrt(n * n)
 n = 0
 print get_sqrt(n * n)
