@@ -21,7 +21,7 @@ float find_sqrt(float n){
 }
 
 int main() {
-	float n = 259.321;
+    float n = 259.321;
     cout << find_sqrt(259.321) << endl;
     return 0;
 }
