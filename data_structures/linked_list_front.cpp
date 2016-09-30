@@ -1,3 +1,14 @@
+#include <exception>
+using namespace std;
+
+class OutOfBoundException: public exception {
+
+    virtual const char* what() const throw() {
+        return "Out of bound exception";
+    }
+
+};
+
 template <class T> class Node {
     public:
         T data;
@@ -12,33 +23,75 @@ template <class T> class Node {
 
 template <class T> class LinkedList {
     private:
-        Node<T>* last;
+        Node<T>* head;
+        Node<T>* tail;
+        int size;
 
     public:
         LinkedList() {
-            this->last = NULL;
+            this->head = NULL;
+            this->tail = NULL;
+            this->size = 0;
         }
 
         bool is_empty() {
-            bool out = false;
-            if (this->last == NULL) {
-                out = true;
+            if (this->head == NULL) {
+                return true;
             }
-            return out;
+            return false;
         }
 
         void insert(T data) {
-            Node<T> element = new Node<T>(data);
-            element->succesor = this->last;
-            this->last = element;
+            Node<T>* element = new Node<T>(data);
+            if (this->head == NULL) {
+                this->head = element;
+                this->tail = element;
+            } else {
+                this->tail->succesor = element;
+                this->tail = this->tail->succesor;
+            }
+            this->size++;
+        }
+
+        void remove(int index) {
+            if (this->size == 0 || index < 0 || this->size <= index) {
+                throw OutOfBoundException();
+            } else {
+                if (index > 1) {
+                    Node<T>* prev = this->head;
+                    Node<T>* current = prev->succesor;
+                    while (index > 0) {
+                        prev = current;
+                        current = current->succesor;
+                    }
+                    prev->succesor = current->succesor;
+                } else {
+                    this->head = this->head->succesor;
+                }
+                if (this->size == 1) {
+                    this->tail = NULL;
+                }
+                this->size--;
+            }
         }
 
         void remove() {
-            this->last = this->last->succesor;
+            remove(0);
         }
 
         T front() {
-            return this->last->data;
+            return this->head->data;
+        }
+
+        T top() {
+            return this->tail->data;
+        }
+
+        void print_list() {
+            Node<T>* element = this->head;
+            while (element != NULL) {
+                cout << element->data << " ";
+            }
         }
 
 };
