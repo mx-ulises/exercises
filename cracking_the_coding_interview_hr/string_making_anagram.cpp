@@ -31,7 +31,7 @@ int number_needed(string a, string b) {
     return get_n_diff(a_count, b_count, first, last);
 }
 
-int main(){
+int main() {
     string a, b;
     cin >> a >> b;
     cout << number_needed(a, b) << endl;
