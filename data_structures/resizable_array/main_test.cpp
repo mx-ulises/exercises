@@ -22,6 +22,7 @@ int main() {
     A.insert(7);
     A.insert(8);
     A.insert(9);
+    A.set(1, 100);
     print_array(&A);
     A.insert(10);
     A.insert(13);

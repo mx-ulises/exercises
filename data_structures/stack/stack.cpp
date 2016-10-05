@@ -1,15 +1,15 @@
 #include <exception>
 using namespace std;
 
-class OutOfBoundException: public exception {
+class StackException: public exception {
 
     virtual const char* what() const throw() {
-        return "Out of bound exception";
+        return "Stack exception";
     }
 
 };
 
-template <class T> class ResizableArray {
+template <class T> class Stack {
 
     private:
         int size = 0;
@@ -28,39 +28,34 @@ template <class T> class ResizableArray {
             }
         }
 
-
     public:
 
-        ResizableArray<T>() {
+        Stack<T>() {
             this->container = new T[this->length];
         }
 
-        int get_size() {
-            return this->size;
+        bool empty() {
+            return this->size == 0;
         }
 
-
-        void set(int index, T item) {
-            if (index < 0 && this->size <= index) {
-                throw OutOfBoundException();
+        T top() {
+            if (this->size == 0) {
+                throw StackException();
             }
-            this->container[index] = item;
+            return this->container[this->size - 1];
         }
 
-
-        T get(int index) {
-            if (index < 0 && this->size <= index) {
-                throw OutOfBoundException();
-            }
-            return this->container[index];
+        T pop() {
+            T value = this->top();
+            //delete &(this->container[this->size - 1]);
+            this->size--;
+            return value;
         }
 
-
-        void insert(T item) {
-            cout << "[INFO] Inserting: " << item << endl;
+        void push(T item) {
             this->resize_container();
             this->container[this->size] = item;
             this->size++;
         }
-
 };
+
