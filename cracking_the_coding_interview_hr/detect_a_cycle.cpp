@@ -12,3 +12,15 @@ bool has_cycle(Node* head) {
     }
     return false;
 }
+
+bool has_cycle_2(Node* head) {
+    if (head == NULL) return false;
+    Node* fast = head->next;
+    Node* slow = head;
+    while (fast != NULL && fast->next != NULL) {
+        if (fast == slow) return true;
+        fast = fast->next->next;
+        slow = slow->next;
+    }
+    return false;
+}
