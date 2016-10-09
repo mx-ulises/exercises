@@ -23,8 +23,29 @@ template <class T> Node<T> *return_last(MyLinkedList<T> *list, int k) {
     return NULL;
 }
 
+
+template <class T> Node<T> *return_last_runner(MyLinkedList<T> *list, int k) {
+    if (k <= 0) {
+        return NULL;
+    }
+    Node<T> *current = list->front();
+    Node<T> *runner = list->front();
+    while (runner != NULL && k > 0) {
+        runner = runner->next;
+        k--;
+    }
+    if (k > 0) {
+        return NULL;
+    }
+    while (runner != NULL) {
+        runner = runner->next;
+        current = current->next;
+    }
+    return current;
+}
+
 template <class T> void print_last_k(MyLinkedList<T> *list, int k) {
-    Node<T> *element = return_last(list, k);
+    Node<T> *element = return_last_runner(list, k);
     cout << "Looking for last " << k << "th" << endl;
     if (element == NULL) {
         cout << "Invalid index" << endl;
