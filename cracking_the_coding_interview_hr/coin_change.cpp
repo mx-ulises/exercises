@@ -7,9 +7,8 @@ long long make_change(int n, vector<int> coins) {
     vector<long long> combs(n + 1);
     combs[0] = 1;
     for (int i = 0; i < coins.size(); i++) {
-        for (int j = 1; j <= n; j++) {
-            int k = j - coins[i];
-            if (k >= 0) combs[j] += combs[k];
+        for (int j = 0; j <= n - coins[i]; j++) {
+            combs[j + coins[i]] += combs[j];
         }
     }
     return combs[n];
