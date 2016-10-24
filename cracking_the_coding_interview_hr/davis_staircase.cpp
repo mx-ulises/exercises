@@ -16,6 +16,19 @@ int count_ways(int n) {
     return count_ways(&ways, n);
 }
 
+int count_ways_2(int n) {
+    int s_1 = 0;
+    int s_2 = 0;
+    int s_3 = 1;
+    for (int i = 0; i < n; i++) {
+        int new_s = s_3 + s_2 + s_1;
+        s_1 = s_2;
+        s_2 = s_3;
+        s_3 = new_s;
+    }
+    return s_3;
+}
+
 int main(){
     int s;
     cin >> s;
