@@ -84,4 +84,8 @@ int main() {
         A.insert(i);
     }
     print_array(&A);
+    for (int i = 0; i < 27; i++) {
+        A.set(i, 100);
+    }
+    print_array(&A);
 }
