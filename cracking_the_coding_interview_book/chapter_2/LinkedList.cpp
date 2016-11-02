@@ -9,6 +9,7 @@ class Node {
 
         Node(int data) {
             this->data = data;
+            this->next = NULL;
         }
 
         void print() {
@@ -22,8 +23,6 @@ class Node {
 };
 
 class LinkedList {
-    private:
-        int n;
     public:
         Node* root;
 
@@ -35,10 +34,15 @@ class LinkedList {
                 root = new Node(data);
                 root->next = aux;
             }
-            n++;
         }
 
         int size() {
+            int n = 0;
+            Node* current = root;
+            while (current != NULL) {
+                n++;
+                current = current->next;
+            }
             return n;
         }
 
