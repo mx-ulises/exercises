@@ -23,7 +23,7 @@ class StringBuilder {
 
         string get_string() {
             int n = size();
-            char* char_buffer = new char[n];
+            char* char_buffer = new char[n + 1];
             int position = 0;
             for (int i = 0; i < strings.size(); i++) {
                 for(int j = 0; j < strings[i].size(); j++) {
@@ -31,6 +31,7 @@ class StringBuilder {
                     position++;
                 }
             }
+            char_buffer[n] = '\0';
             string out_string(char_buffer);
             return out_string;
         }
