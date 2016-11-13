@@ -1,6 +1,9 @@
 #include <vector>
 #include <map>
+#include <stack>
 #include <iostream>
+#include <set>
+#include <utility>
 
 using namespace std;
 
@@ -35,6 +38,17 @@ class Graph {
 
 };
 
+void print_line() {
+    cout << "===========================================" << endl;
+}
+
+void print_node(Node* node, int d) {
+    for (int i = 0; i < d; i++) {
+        cout << " ";
+    }
+    cout << node->data << endl;
+}
+
 void print_node(Node* node) {
     cout << "DATA: " << node->data << endl;
     for (int i = 0; i < node->adjacent.size(); i++) {
@@ -50,9 +64,35 @@ void print_nodes(Graph* g) {
     }
 }
 
+void dfs(Graph* g, int value) {
+    cout << "DFS starting from " << value << endl;
+    Node* node = g->nodes[value];
+    pair<Node*, int> s_0(node, 0);
+    stack<pair<Node*, int>> open;
+    set<Node*> closed;
+    open.push(s_0);
+    while (!open.empty()) {
+        pair<Node*, int> x = open.top();
+        open.pop();
+        Node* node = x.first;
+        int d = x.second;
+        if (closed.find(node) != closed.end()) {
+            continue;
+        }
+        print_node(node, d);
+        for (int i = 0; i < node->adjacent.size(); i++) {
+            Node* node_1 = node->adjacent[i];
+            pair<Node*, int> y(node_1, d + 1);
+            open.push(y);
+        }
+        closed.insert(node);
+    }
+    print_line();
+}
+
 int main() {
     Graph* g = new Graph();
-    for (int i = 0; i < 5; i++) {
+    for (int i = 0; i < 6; i++) {
         g->insert_node(i);
     }
     g->add_edge(0, 1);
@@ -64,7 +104,11 @@ int main() {
     g->add_edge(2, 2);
     g->add_edge(3, 4);
     g->add_edge(4, 1);
-
+    g->add_edge(4, 5);
     print_nodes(g);
+    print_line();
+    dfs(g, 0);
+    dfs(g, 2);
+    dfs(g, 1);
     return 0;
 }
