@@ -3,6 +3,7 @@
 #include <stack>
 #include <iostream>
 #include <set>
+#include <queue>
 #include <utility>
 
 using namespace std;
@@ -74,17 +75,39 @@ void dfs(Graph* g, int value) {
     while (!open.empty()) {
         pair<Node*, int> x = open.top();
         open.pop();
-        Node* node = x.first;
-        int d = x.second;
-        if (closed.find(node) != closed.end()) {
+        node = x.first;
+        if (closed.find(node) != closed.end())
             continue;
-        }
-        print_node(node, d);
         for (int i = 0; i < node->adjacent.size(); i++) {
             Node* node_1 = node->adjacent[i];
-            pair<Node*, int> y(node_1, d + 1);
+            pair<Node*, int> y(node_1,  x.second + 1);
             open.push(y);
         }
+        print_node(node, x.second);
+        closed.insert(node);
+    }
+    print_line();
+}
+
+void bfs(Graph* g, int value) {
+    cout << "BFS starting from " << value << endl;
+    Node* node = g->nodes[value];
+    pair<Node*, int> s_0(node, 0);
+    queue<pair<Node*, int>> open;
+    set<Node*> closed;
+    open.push(s_0);
+    while (!open.empty()) {
+        pair<Node*, int> x = open.front();
+        open.pop();
+        node = x.first;
+        if (closed.find(node) != closed.end())
+                    continue;
+        for (int i = 0; i < node->adjacent.size(); i++) {
+            Node* node_1 = node->adjacent[i];
+            pair<Node*, int> y(node_1, x.second + 1);
+            open.push(y);
+        }
+        print_node(node, x.second);
         closed.insert(node);
     }
     print_line();
@@ -110,5 +133,9 @@ int main() {
     dfs(g, 0);
     dfs(g, 2);
     dfs(g, 1);
+    print_line();
+    bfs(g, 0);
+    bfs(g, 2);
+    bfs(g, 1);
     return 0;
 }
