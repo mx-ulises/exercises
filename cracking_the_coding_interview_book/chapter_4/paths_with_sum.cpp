@@ -1,5 +1,5 @@
 #include <iostream>
-#include <vector>
+#include <map>
 
 
 using namespace std;
@@ -30,32 +30,30 @@ class BT {
         }
 };
 
-int get_path(vector<int>* sums, int k, int n) {
-    int path_count = 0;
-    for (int i = 0; i < sums->size(); i++) {
-        if ((k - (*sums)[i]) == n)
-            path_count++;
-    }
-    return path_count;
+int get_path(map<int, int>* sums, int k, int n) {
+	int delta = k - n;
+    if (sums->find(delta) != sums->end())
+        return (*sums)[delta];
+    return 0;
 }
 
-int paths_with_sum(BT* root, vector<int>* sums, int n) {
+int paths_with_sum(BT* root, map<int, int>* sums, int n, int k) {
     if (root == NULL)
         return 0;
     int d = sums->size() - 1;
-    int k = (*sums)[d] + root->data;
-    int path_count = get_path(sums, k, n);
-    sums->push_back(k);
-    path_count += paths_with_sum(root->left, sums, n);
-    path_count += paths_with_sum(root->right, sums, n);
-    sums->pop_back();
+    int k_new = k + root->data;
+    int path_count = get_path(sums, k_new, n);
+    (*sums)[k_new]++;
+    path_count += paths_with_sum(root->left, sums, n, k_new);
+    path_count += paths_with_sum(root->right, sums, n, k_new);
+    (*sums)[k_new]--;
     return path_count;
 }
 
 int paths_with_sum(BT* root, int n) {
-    vector<int>* sums = new vector<int>();
-    sums->push_back(0);
-    int path_count = paths_with_sum(root, sums, n);
+    map<int, int>* sums = new map<int, int>();
+    (*sums)[0] = 1;
+    int path_count = paths_with_sum(root, sums, n, 0);
     delete sums;
     return path_count;
 }
