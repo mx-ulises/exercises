@@ -8,14 +8,14 @@ int flip_to_win(int n) {
     int streak = 1;
     int curr = 0;
     while (n != 0) {
-        if (n % 2 == 0) {
+        if ((n & 1) == 0) {
             streak = max(streak, prev + curr + 1);
             prev = curr;
             curr = 0;
         } else {
             curr++;
         }
-        n = n / 2;
+        n = n >> 1;
     }
     streak = max(streak, prev + curr + 1);
     return streak;
