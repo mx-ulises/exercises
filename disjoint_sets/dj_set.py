@@ -21,4 +21,4 @@ class DisjointSet(object):
             self.parent[y_root] = x_root
         else:
             self.parent[y_root] = x_root
-            self.rank[x_root]+=1
+            self.rank[x_root] += 1
