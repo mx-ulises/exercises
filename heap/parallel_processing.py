@@ -1,27 +1,25 @@
 #!/bin/python
 
-from heapq import heappush, heappop, heapify
+from heapq import heappush, heappop
 
 p, n = map(int, raw_input().split())
 jobs = map(int, raw_input().split())
-
-processors = [i for i in xrange(p)]
-heapify(processors)
-
 wip = []
 
 time = 0
 i = 0
 
-while i < len(jobs):
-    while processors and i < len(jobs):
-        p = heappop(processors)
-        print "{0} {1}".format(p, time)
-        item = (time + jobs[i], p)
-        heappush(wip, item)
-        i += 1
-    time, p = heappop(wip)
-    heappush(processors, p)
-    while wip and wip[0][0] == time:
-        time, p = heappop(wip)
-        heappush(processors, p)
+def push_item(pid, start_time, duration, wip):
+    print "{0} {1}".format(pid, start_time)
+    finish_time = start_time + duration
+    item = (finish_time, pid)
+    heappush(wip, item)
+
+while i < p and i < n:
+    push_item(i, time, jobs[i], wip)
+    i += 1
+
+while i < n:
+    time, pid = heappop(wip)
+    push_item(pid, time, jobs[i], wip)
+    i += 1
