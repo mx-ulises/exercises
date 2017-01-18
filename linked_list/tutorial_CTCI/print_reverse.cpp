@@ -3,8 +3,7 @@ struct Node {
     struct Node* next;
 };
 
-void ReversePrint(Node *head)
-{
+void ReversePrint(Node *head)  {
     if (head == NULL) return;
     ReversePrint(head->next);
     cout << head->data << endl;
