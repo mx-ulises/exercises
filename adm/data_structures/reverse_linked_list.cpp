@@ -1,3 +1,5 @@
+// Reverse Single-Linked List (ADM-3.2)
+
 #include <stack>
 #include <iostream>
 
