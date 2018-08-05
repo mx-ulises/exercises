@@ -1,7 +1,7 @@
 #!/bin/python
 
 def zero_matrix(M):
-    # Get dimensions 
+    # Get dimensions
     n, m = len(M), len(M[0])
 
     # Get 0-column zeros
@@ -41,7 +41,6 @@ def zero_matrix(M):
 
     # Return matrix
     return M
-
 
 
 def test(M):
