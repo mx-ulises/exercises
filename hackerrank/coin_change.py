@@ -8,7 +8,7 @@ count[0] = 1
 
 for c in C:
     for i in xrange(n):
-        if (i + c) <= n: 
+        if (i + c) <= n:
             count[i + c] += count[i]
 
 print count[n]
